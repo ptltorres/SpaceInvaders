@@ -1,14 +1,15 @@
 package game;
 
 import java.util.ArrayList;
-import processing.core.PApplet;
-import processing.core.PImage;
+import processing.core.*;
 
 public class Game extends PApplet {
 	
 	public static final int screenWidth = 600, screenHeight = 400;
 	
 	private int numOfEnemies, enemySpeed;
+	private float timeBetweenAttack = 1.5f;
+	private long timeSinceLastAttack = 0;
 	
 	private Ship ship;
 	private ArrayList<Enemy> enemies;
@@ -16,8 +17,11 @@ public class Game extends PApplet {
 	
 	private boolean gameOver = false;
 
-	public void setup(){
-		size(screenWidth, screenHeight);
+	public void settings() {
+	    size(screenWidth , screenHeight);
+	  }
+	
+	public void setup() {
 		
 		numOfEnemies = 6;
 		enemySpeed = 3;
@@ -102,6 +106,7 @@ public class Game extends PApplet {
 		if (keyCode == ' ') {
 			Bullet bullet = new Bullet(this, ship.x, ship.y);
 			bullets.add(bullet);
+			
 		}
 		
 		// Move ship left or right
@@ -110,5 +115,9 @@ public class Game extends PApplet {
 		} else if (keyCode == LEFT) {
 			ship.move(-2);
 		}
+	}
+	
+	public static void main(String[] args) {
+		PApplet.main("game.Game");
 	}
 }
